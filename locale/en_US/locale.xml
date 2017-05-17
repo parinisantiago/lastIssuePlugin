@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+
+
+<locale name="en_US" full_name="U.S. English">
+	<message key="plugins.block.lastIssue.displayName">"Last Issue" Block</message>
+	<message key="plugins.block.lastIssue.description">This plugin provides sidebar "last issues" list.</message>
+</locale>

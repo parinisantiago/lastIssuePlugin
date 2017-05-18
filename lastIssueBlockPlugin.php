@@ -22,7 +22,7 @@ class LastIssueBlockPlugin extends BlockPlugin {
 
     function build_sorter($key){
 		return function ($a, $b) use ($key){
-			return strnatcmp($a[$key], $b[$key]);
+			return strnatcmp($b[$key], $a[$key]);
 		};
     }
 
@@ -33,8 +33,8 @@ class LastIssueBlockPlugin extends BlockPlugin {
         $journals = $journalDao->getAll(true, null)->toArray();
 
         foreach ($journals as $journal){
-        	$lastIssue = array();
-        	$issue = $issueDao->getCurrent($journal->getId());
+            $issue = $issueDao->getCurrent($journal->getId());
+            $lastIssue = array();
 			$lastIssue['published'] = $issue->getDatePublished();
 			$lastIssue['journal'] = $journal->getLocalizedName();
 			$lastIssue['path'] = $journal->getPath();
@@ -43,7 +43,7 @@ class LastIssueBlockPlugin extends BlockPlugin {
 		}
 
 		usort($lastIssues, $this->build_sorter('published'));
-
+		$lastIssues = array_slice($lastIssues,0,5);
         $templateMgr->assign(array(
 			'issues' => $lastIssues
         ));

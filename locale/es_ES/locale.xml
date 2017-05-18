@@ -5,4 +5,6 @@
 	<message key="plugins.block.lastIssue.displayName">Bloque "Últimos números"</message>
 	<message key="plugins.block.lastIssue.description">Este complemento proporciona una barra lateral con un lista de "Últimos números".</message>
 	<message key="plugins.block.lastIssue.listTitle">Últimos números publicados</message>
+	<message key="plugins.block.lastIssue.volume">Vol. </message>
+	<message key="plugins.block.lastIssue.number"> ,Núm.</message>
 </locale>

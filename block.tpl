@@ -1,8 +1,10 @@
 
 <div class="pkp_block block_last_issue">
-	<div class="content">
-		<ul class="JournalLastIssue">
-				<li> </li>
+	<span class="title">
+		{translate key="plugins.block.lastIssue.listTitle"}
+	</span>
+	<span class="content">
+		<ul class="LastIssues">
             {foreach from=$issues item=issue}
 				<li>
 					{$issue.journal} -
@@ -10,5 +12,5 @@
 				</li>
             {/foreach}
 		</ul>
-	</div>
+	</span>
 </div>

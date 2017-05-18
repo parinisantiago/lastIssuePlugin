@@ -6,4 +6,5 @@
 <locale name="en_US" full_name="U.S. English">
 	<message key="plugins.block.lastIssue.displayName">"Last Issue" Block</message>
 	<message key="plugins.block.lastIssue.description">This plugin provides sidebar "last issues" list.</message>
+	<message key="plugins.block.lastIssue.listTitle">Last Published Issues</message>
 </locale>

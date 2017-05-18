@@ -27,7 +27,7 @@ class LastIssueBlockPlugin extends BlockPlugin {
     }
 
     function getContents($templateMgr, $request = null) {
-        $issueDao = DAORegistry::getDAO('IssueDAO');
+		$issueDao = DAORegistry::getDAO('IssueDAO');
         $journalDao = DAORegistry::getDAO('JournalDAO');
 		$lastIssues = array();
         $journals = $journalDao->getAll(true, null)->toArray();
@@ -38,12 +38,13 @@ class LastIssueBlockPlugin extends BlockPlugin {
 			$lastIssue['published'] = $issue->getDatePublished();
 			$lastIssue['journal'] = $journal->getLocalizedName();
 			$lastIssue['path'] = $journal->getPath();
-			$lastIssue['issue'] = $issue->getLocalizedTitle();
+			$lastIssue['issue'] = __('plugins.block.lastIssue.volume').$issue->getVolume().__('plugins.block.lastIssue.number').$issue->getNumber().' ('.$issue->getYear().')';
 			array_push($lastIssues, $lastIssue);
 		}
 
 		usort($lastIssues, $this->build_sorter('published'));
 		$lastIssues = array_slice($lastIssues,0,5);
+
         $templateMgr->assign(array(
 			'issues' => $lastIssues
         ));

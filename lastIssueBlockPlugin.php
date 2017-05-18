@@ -20,29 +20,38 @@ class LastIssueBlockPlugin extends BlockPlugin {
 		return __('plugins.block.lastIssue.description');
 	}
 
+    function build_sorter($key){
+		return function ($a, $b) use ($key){
+			return strnatcmp($a[$key], $b[$key]);
+		};
+    }
+
     function getContents($templateMgr, $request = null) {
         $issueDao = DAORegistry::getDAO('IssueDAO');
         $journalDao = DAORegistry::getDAO('JournalDAO');
 		$lastIssues = array();
         $journals = $journalDao->getAll(true, null)->toArray();
+
         foreach ($journals as $journal){
         	$lastIssue = array();
         	$issue = $issueDao->getCurrent($journal->getId());
-        	if($issue)
-        	{
-                $lastIssue['journal'] = $journal->getLocalizedName();
-                $lastIssue['path'] = $journal->getPath();
-                $lastIssue['issue'] = $issue->getLocalizedTitle();
-                $lastIssue['published'] = $issue->getDatePublished();
-                array_push($lastIssues, $lastIssue);
-            }
+			$lastIssue['published'] = $issue->getDatePublished();
+			$lastIssue['journal'] = $journal->getLocalizedName();
+			$lastIssue['path'] = $journal->getPath();
+			$lastIssue['issue'] = $issue->getLocalizedTitle();
+			array_push($lastIssues, $lastIssue);
 		}
+
+		usort($lastIssues, $this->build_sorter('published'));
+
         $templateMgr->assign(array(
 			'issues' => $lastIssues
         ));
 
         return parent::getContents($templateMgr, $request);
     }
+
+
 }
 
 ?>

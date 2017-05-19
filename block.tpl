@@ -4,11 +4,13 @@
 		{translate key="plugins.block.lastIssue.listTitle"}
 	</span>
 	<span class="content">
-		<ul class="LastIssues">
+		<ul class="last_issues_list">
             {foreach from=$issues item=issue}
-				<li>
-					{$issue.journal} -
-					<a href="{url|escape journal=$issue.path page="issue" op="current"}" >{$issue.issue}</a>
+				<li class="last_issues_list_item">
+					<span class="last_issues_journal_title"> {$issue.journal} </span>
+					<span class="last_issues_link">
+						<a href="{url|escape journal=$issue.path page="issue" op="current"}" >{$issue.issue}</a>
+					</span>
 				</li>
             {/foreach}
 		</ul>
